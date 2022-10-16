@@ -1,5 +1,6 @@
 #!/bin/bash
-export LANG="en_US.UTF-8"
+export LANG=en_US.UTF-8
+shopt -s nullglob
 
 function dir() {
     name="${1##*/}"
@@ -9,7 +10,7 @@ function dir() {
         ans2=$((ans2+1))
     fi
     printf "$3$4$name\n"
-    local subd=(${1}/*)
+    local subd=("${1}"/*)
     if [[ -d ${subd[0]} ]] || [[ -f ${subd[0]} ]]; then
         true
     else
@@ -21,6 +22,7 @@ function dir() {
     local size=${#subd[@]}
     for (( ; i<$size; i++ ))
     {
+        local child=${subd[$i]}
         if [ ${5} == 0 ];
         then
             l="$f\u0020\u0020\u0020\u0020"
@@ -30,10 +32,10 @@ function dir() {
         if [ $((i+1)) == ${#subd[@]} ];
         then
             r="\u2514\u2500\u2500\u0020"
-            dir ${subd[i]} $((1+count)) $l $r 0
+            dir "$child" "$((1+count))" "$l" "$r" 0
         else
             r="\u251c\u2500\u2500\u0020"
-            dir ${subd[i]} $((1+count)) $l $r 1
+            dir "$child" "$((1+count))" "$l" "$r" 1
         fi
     }
 }
@@ -46,21 +48,22 @@ else
     root=$1
 fi
 if [ -d $root ]; then
-    printf "$1\n"
+    printf "$root\n"
 else
-    printf "$1\u0020\u0020[error opening dir]\n"
+    printf "$root\u0020\u0020[error opening dir]\n"
 fi
-root_subd=(${root}/*)
+root_subd=("${root}"/*)
 ans1=0
 ans2=0
 if [[ -d ${root_subd[0]} ]] || [[ -f ${root_subd[0]} ]]; then
     for (( i=0; i<${#root_subd[@]}; i++ ))
     do
+        child=${root_subd[$i]}
         if [ $((i+1)) == ${#root_subd[@]} ];
         then
-            dir ${root_subd[i]} 1 "" "\u2514\u2500\u2500\u0020" 0
+            dir "$child" 1 "" "\u2514\u2500\u2500\u0020" 0
         else
-            dir ${root_subd[i]} 1 "" "\u251c\u2500\u2500\u0020" 1
+            dir "$child" 1 "" "\u251c\u2500\u2500\u0020" 1
         fi
     done
 fi
@@ -73,3 +76,4 @@ if [ $ans2 == 1 ]; then
     files="file"
 fi
 printf "\n$ans1 $dirs, $ans2 $files\n"
+shopt -u nullglob
