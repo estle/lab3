@@ -26,7 +26,7 @@ function dir() {
         then
             l="$f\u0020\u0020\u0020\u0020"
         else
-            l="$f\u2502\u0020\u0020\u0020"
+            l="$f\u2502\u00A0\u00A0\u0020"
         fi
         if [ $((i+1)) == ${#subd[@]} ];
         then
