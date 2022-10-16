@@ -53,7 +53,7 @@ fi
 root_subd=(${root}/*)
 ans1=0
 ans2=0
-if [ -d ${root_subd[0]} ] || [ -f ${root_subd[0]} ]; then
+if [[ -d ${root_subd[0]} ]] || [[ -f ${root_subd[0]} ]]; then
     for (( i=0; i<${#root_subd[@]}; i++ ))
     do
         if [ $((i+1)) == ${#root_subd[@]} ];
