@@ -42,7 +42,7 @@ function dir() {
 
 
 cd dir
-if [ -z $1 ]; then
+if [ -z $1 ] || [ $1 == "/" ]; then
     root="."
 else
     root=$1
