@@ -10,9 +10,7 @@ function dir() {
     fi
     printf "$3$4$name\n"
     local subd=(${1}/*)
-    if [[ -d ${subd[0]} ]]; then
-        true
-    elif [[ -f ${subd[0]} ]]; then
+    if [[ -d ${subd[0]} ]] || [[ -f ${subd[0]} ]]; then
         true
     else
         return
@@ -55,7 +53,7 @@ fi
 root_subd=(${root}/*)
 ans1=0
 ans2=0
-if [[ -d ${root_subd[0]} ]]; then
+if [ -d ${root_subd[0]} ] || [ -f ${root_subd[0]} ]; then
     for (( i=0; i<${#root_subd[@]}; i++ ))
     do
         if [ $((i+1)) == ${#root_subd[@]} ];
