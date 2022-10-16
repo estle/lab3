@@ -47,15 +47,17 @@ root="dir${folder}"
 root_subd=(${root}/*)
 ans1=0
 ans2=0
-for (( i=0; i<${#root_subd[@]}; i++ ))
-do
-    if [ $((i+1)) == ${#root_subd[@]} ];
-    then
-        dir ${root_subd[i]} 1 "" "\u2514\u2500\u2500\u0020" 0
-    else
-        dir ${root_subd[i]} 1 "" "\u251c\u2500\u2500\u0020" 1
-    fi
-done
+if [ "${root_subd[0]##*/}" != "*" ]; then
+    for (( i=0; i<${#root_subd[@]}; i++ ))
+    do
+        if [ $((i+1)) == ${#root_subd[@]} ];
+        then
+            dir ${root_subd[i]} 1 "" "\u2514\u2500\u2500\u0020" 0
+        else
+            dir ${root_subd[i]} 1 "" "\u251c\u2500\u2500\u0020" 1
+        fi
+    done
+fi
 dirs="directories"
 files="files"
 if [ $ans1 == 1 ]; then
