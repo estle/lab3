@@ -40,14 +40,17 @@ function dir() {
 }
 
 
+cd dir
 if [ -z $1 ]; then
-    folder="."
+    root="."
 else
-    folder=$1
+    root=$1
 fi
-echo "$folder"
-folder=${folder:1}
-root="dir${folder}"
+if [ -d $root ]; then
+    printf "$root\n"
+else
+    printf "$root\u0020\u0020[error opening dir]\n"
+fi
 root_subd=(${root}/*)
 ans1=0
 ans2=0
