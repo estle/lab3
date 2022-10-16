@@ -19,16 +19,17 @@ function dir() {
     local i=0
     local f=$3
     local size=${#subd[@]}
+    local arg5=$5
     for (( ; i<$size; i++ ))
     {
         local child=${subd[$i]}
-        if [ ${5} == 0 ];
+        if [ $arg5 == 0 ];
         then
             l="$f\u0020\u0020\u0020\u0020"
         else
             l="$f\u2502\u00A0\u00A0\u0020"
         fi
-        if [ $((i+1)) == ${#subd[@]} ];
+        if [ $((i+1)) == $size ];
         then
             r="\u2514\u2500\u2500\u0020"
             dir "$child" "$((1+count))" "$l" "$r" 0
