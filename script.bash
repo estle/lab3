@@ -1,6 +1,5 @@
 #!/bin/bash
 export LANG=en_US.UTF-8
-shopt -s nullglob
 
 function dir() {
     name="${1##*/}"
@@ -48,9 +47,9 @@ else
     root=$1
 fi
 if [ -d $root ]; then
-    printf "$root\n"
+    printf "$1\n"
 else
-    printf "$root\u0020\u0020[error opening dir]\n"
+    printf "$1\u0020\u0020[error opening dir]\n"
 fi
 root_subd=("${root}"/*)
 ans1=0
@@ -76,4 +75,3 @@ if [ $ans2 == 1 ]; then
     files="file"
 fi
 printf "\n$ans1 $dirs, $ans2 $files\n"
-shopt -u nullglob
