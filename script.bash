@@ -10,17 +10,18 @@ function dir() {
     fi
     printf "$3$4$name\n"
     local subd=(${1}/*)
-    if [ "${#subd[@]}" == 1 ];
-    then
-        if [ "${subd[@]##*/}" == "*" ];
-        then
-            return
-        fi
+    if [[ -d ${subd[0]} ]]; then
+        true
+    elif [[ -f ${subd[0]} ]]; then
+        true
+    else
+        return
     fi
     local count=$2
     local i=0
     local f=$3
-    for (( ; i<${#subd[@]}; i++ ))
+    local size=${#subd[@]}
+    for (( ; i<$size; i++ ))
     {
         if [ ${5} == 0 ];
         then
@@ -54,7 +55,7 @@ fi
 root_subd=(${root}/*)
 ans1=0
 ans2=0
-if [ "${root_subd[0]##*/}" != "*" ]; then
+if [[ -d ${root_subd[0]} ]]; then
     for (( i=0; i<${#root_subd[@]}; i++ ))
     do
         if [ $((i+1)) == ${#root_subd[@]} ];
