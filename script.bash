@@ -40,8 +40,14 @@ function dir() {
 }
 
 
-root=$1
-echo "$1"
+if [ -z $1 ]; then
+    folder="."
+else
+    folder=$1
+fi
+echo "$folder"
+folder=${folder:1}
+root="dir${folder}"
 root_subd=(${root}/*)
 ans1=0
 ans2=0
