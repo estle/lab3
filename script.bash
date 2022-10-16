@@ -47,9 +47,9 @@ else
     root=$1
 fi
 if [ -d $root ]; then
-    printf "$1\n"
+    printf "$root\n"
 else
-    printf "$1\u0020\u0020[error opening dir]\n"
+    printf "$root\u0020\u0020[error opening dir]\n"
 fi
 root_subd=("${root}"/*)
 ans1=0
