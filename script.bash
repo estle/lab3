@@ -40,10 +40,8 @@ function dir() {
 }
 
 
-folder=$1
+root=$1
 echo "$1"
-folder=${folder:1}
-root="dir${folder}"
 root_subd=(${root}/*)
 ans1=0
 ans2=0
