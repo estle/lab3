@@ -71,4 +71,5 @@ fi
 if [ $ans2 == 1 ]; then
     files="file"
 fi
-printf "\n$ans1 $dirs, $ans2 $files\n"
+echo ""
+echo "$ans1 $dirs, $ans2 $files"
