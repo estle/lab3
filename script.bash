@@ -23,7 +23,7 @@ function dir() {
     for (( ; i<$size; i++ ))
     {
         local child="${subd[$i]}"
-        if [ $arg5 == 0 ];
+        if [ "$arg5" == 0 ];
         then
             l="$f\u0020\u0020\u0020\u0020"
         else
