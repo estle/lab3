@@ -47,11 +47,9 @@ if [ -z $1 ] || [ $1 == "/" ]; then
 else
     root=$1
 fi
-if [ -d $root ]; then
-    printf "$root\n"
-else
-    printf "$root\u0020\u0020[error opening dir]\n"
-fi
+
+printf "$root\n"
+
 root_subd=("${root}"/*)
 ans1=0
 ans2=0
