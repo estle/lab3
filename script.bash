@@ -3,26 +3,26 @@ export LANG=en_US.UTF-8
 
 function dir() {
     name="${1##*/}"
-    if [[ -d $1 ]]; then
+    if [[ -d "$1" ]]; then
         ans1=$((ans1+1))
-    elif [[ -f $1 ]]; then
+    elif [[ -f "$1" ]]; then
         ans2=$((ans2+1))
     fi
     printf "$3$4$name\n"
     local subd=("${1}"/*)
-    if [[ -d ${subd[0]} ]] || [[ -f ${subd[0]} ]]; then
+    if [[ -d "${subd[0]}" ]] || [[ -f "${subd[0]}" ]]; then
         true
     else
         return
     fi
     local count=$2
     local i=0
-    local f=$3
-    local size=${#subd[@]}
-    local arg5=$5
+    local f="$3"
+    local size="${#subd[@]}"
+    local arg5="$5"
     for (( ; i<$size; i++ ))
     {
-        local child=${subd[$i]}
+        local child="${subd[$i]}"
         if [ $arg5 == 0 ];
         then
             l="$f\u0020\u0020\u0020\u0020"
@@ -47,18 +47,14 @@ if [ -z "$1" ]; then
 else
     root="$1"
 fi
-if [ -d "$root" ]; then
-    printf "$root\n"
-else
-    printf "$root\u0020\u0020[error opening dir]\n"
-fi
+printf "$root\n"
 root_subd=("${root}"/*)
 ans1=0
 ans2=0
 if [[ -d ${root_subd[0]} ]] || [[ -f ${root_subd[0]} ]]; then
     for (( i=0; i<${#root_subd[@]}; i++ ))
     do
-        child=${root_subd[$i]}
+        child="${root_subd[$i]}"
         if [ $((i+1)) == ${#root_subd[@]} ];
         then
             dir "$child" 1 "" "\u2514\u2500\u2500\u0020" 0
