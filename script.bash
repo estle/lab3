@@ -23,7 +23,7 @@ traverse() {
       child_prefix="    "
     fi
 
-    echo "${prefix}${pointer} ${child##*/}"
+    echo "${prefix}${pointer}${child##*/}"
     [ -d "$child" ] &&
       traverse "$child" "${prefix}$child_prefix" ||
       file_count=$((file_count + 1))
