@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/env bash
 export LANG=en_US.UTF-8
 
 function dir() {
     name="${1##*/}"
     if [[ -d "$1" ]]; then
-        ans1=$((ans1+1))
+        ans1=$(($ans1+1))
     elif [[ -f "$1" ]]; then
-        ans2=$((ans2+1))
+        ans2=$(($ans2+1))
     fi
     printf "$3$4$name\n"
     local subd=("${1}"/*)
