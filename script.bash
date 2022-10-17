@@ -29,7 +29,7 @@ function dir() {
         else
             l="$f\u2502\u00A0\u00A0\u0020"
         fi
-        if [ $((i+1)) == $size ];
+        if [ $(($i+1)) == $size ];
         then
             r="\u2514\u2500\u2500\u0020"
             dir "$child" "$((1+count))" "$l" "$r" 0
@@ -51,11 +51,12 @@ printf "$root\n"
 root_subd=("${root}"/*)
 ans1=0
 ans2=0
+sz=${#root_subd[@]}
 if [[ -d ${root_subd[0]} ]] || [[ -f ${root_subd[0]} ]]; then
-    for (( i=0; i<${#root_subd[@]}; i++ ))
+    for (( j=0; j<$sz; j++ ))
     do
-        child="${root_subd[$i]}"
-        if [ $((i+1)) == ${#root_subd[@]} ];
+        child="${root_subd[$j]}"
+        if [ $(($j+1)) == $sz ];
         then
             dir "$child" 1 "" "\u2514\u2500\u2500\u0020" 0
         else
