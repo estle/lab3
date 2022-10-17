@@ -37,5 +37,13 @@ echo $root
 
 traverse $root ""
 echo
-echo "$(($dir_count - 1)) directories, $file_count files"
+dirs="directories"
+if [ $(($dir_count - 1)) == 1 ]; then
+    dirs="directory"
+fi
+files="files"
+if [ $file_count == 1 ]; then
+    files="file"
+fi
+echo "$(($dir_count - 1)) $dirs, $file_count $files"
 shopt -u nullglob
