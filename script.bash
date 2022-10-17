@@ -1,5 +1,6 @@
 #!/bin/bash
 export LANG=en_US.UTF-8
+shopt -s nullglob
 
 function dir() {
     name="${1##*/}"
@@ -7,10 +8,12 @@ function dir() {
         ans1=$((ans1+1))
     elif [[ -f $1 ]]; then
         ans2=$((ans2+1))
+    else
+        return
     fi
     printf "$3$4$name\n"
     local subd=("${1}"/*)
-    if [[ -d ${subd[0]} ]] || [[ -f ${subd[0]} ]]; then
+    if [[ -d "${subd[0]}" ]] || [[ -f "${subd[0]}" ]]; then
         true
     else
         return
@@ -22,7 +25,7 @@ function dir() {
     local arg5=$5
     for (( ; i<$size; i++ ))
     {
-        local child=${subd[$i]}
+        local child="${subd[$i]}"
         if [ $arg5 == 0 ];
         then
             l="$f\u0020\u0020\u0020\u0020"
@@ -42,11 +45,8 @@ function dir() {
 
 
 cd dir
-if [ -z $1 ] || [ $1 == "/" ]; then
-    root="."
-else
-    root=$1
-fi
+root="."
+[ "$#" -ne 0 ] && root="$1"
 
 printf "$root\n"
 
